@@ -6,5 +6,5 @@ Cada um dos padrões foi verificado utilizando a bilbioteca PHP Trader e plotada
 
 Detalhes podem ser vistos na imagem abaixo
 
-![alt text](https://github.com/cleyversoncosta/candlestick-patterns/blob/main/images/1.png)
+![Candlestick Patterns](https://github.com/cleyversoncosta/candlestick-patterns/blob/main/images/1.png)
 
