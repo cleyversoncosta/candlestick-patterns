@@ -23,7 +23,7 @@ Foi utilizado [Laravel Websockets](https://beyondco.de/docs/laravel-websockets/g
 ---
 --- 
 
-Detalhes podem ser vistos na imagem abaixo
+O resultado final pode ser visto na imagem abaixo
 
 ![Candlestick Patterns](https://github.com/cleyversoncosta/candlestick-patterns/blob/main/images/1.png)
 
