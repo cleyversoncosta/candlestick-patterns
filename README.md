@@ -20,9 +20,8 @@ Cada um dos padrões foi verificado utilizando a bilbioteca [PHP Trader](https:/
 ### Websockets - Laravel Echo
 Foi utilizado [Laravel Websockets](https://beyondco.de/docs/laravel-websockets/getting-started/introduction) + [Laravel Echo/Broadcasting](https://laravel.com/docs/8.x/broadcasting) para no futuro permitir que a análise gráfica pudesse ser compartilhada com outras pessoas e assim pudessem ver o mesmo gráfico simultâneamente.
 
---
-
---
+---
+--- 
 
 Detalhes podem ser vistos na imagem abaixo
 
