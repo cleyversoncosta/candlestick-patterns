@@ -8,12 +8,8 @@ Cada um dos padrões foi verificado utilizando a bilbioteca [PHP Trader](https:/
 Com este sistema você pode:
 
 1. Verificar a formação de candles com base em dados históticos
-2. Usar a extração de dados em MQL5 Metatrader e fazer a analização em tempo real
+2. Usar a extração de dados em [MQL5 Metatrader](https://www.mql5.com/pt/docs) e fazer a análise em tempo real
 3. Usar como simulador para estudar as formações de candle
-
-
-
-
 
 
 Detalhes podem ser vistos na imagem abaixo
