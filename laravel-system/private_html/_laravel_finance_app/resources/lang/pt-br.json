@@ -1,0 +1,19 @@
+{
+    "Hello!": "Olá!",
+    "Whoops!" : "Oops!",
+    "Regards" : "Atenciosamente",
+    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below into your web browser:" : "Se você está tendo algum problema em clicar no botão :actionText, copie e cole a URL abaixo no seu browser:",
+    "All rights reserved." : "Todos os direitos reservados",
+
+
+    "Verify Your Email Address" : "Confirme seu endereço de e-mail",
+    "A fresh verification link has been sent to your email address." : "Um novo link de confirmação foi enviado ao seu e-mail.",
+    "Before proceeding, please check your email for a verification link." : "Antes de prosseguir, confirme seu endereço de e-mail através do link de verificação que já te enviamos.",
+    "If you did not receive the email" : "Se você não recebeu o e-mail",
+    "click here to request another" : "clique aqui para solicitar novamente",
+
+    "Verify Email Address" : "Confirme seu endereço de e-mail",
+    "Please click the button below to verify your email address." : "Clique no botão abaixo para confirmar seu endereço de e-mail.",
+    "If you did not create an account, no further action is required." : "Se você não criou uma conta, nenhuma ação é necessária."
+
+}

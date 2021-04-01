@@ -1,0 +1,10 @@
+
+		\App\Product::all()->each(function($p) {
+			
+				\App\UserProduct::where('product_id', '=', $p->id)->update([
+				'name' => $p->name,
+				'description' => $p->description,
+				'slug' => \Str::slug($p->name).'-'.$p->id,
+				]);
+				
+		});
