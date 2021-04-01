@@ -41,4 +41,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
      wsHost: window.location.hostname,
      wsPort: 6001
  });
+
+ var Turbolinks = require("turbolinks")
+Turbolinks.start()
  

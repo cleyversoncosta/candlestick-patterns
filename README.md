@@ -28,6 +28,8 @@ Já foi implementado para caso alguém queira partir deste ponto para oferecer c
 
 O resultado final pode ser visto na imagem abaixo
 
+![Candlestick Patterns](https://github.com/cleyversoncosta/candlestick-patterns/blob/main/images/2.png)
+
 ![Candlestick Patterns](https://github.com/cleyversoncosta/candlestick-patterns/blob/main/images/1.png)
 
 ---

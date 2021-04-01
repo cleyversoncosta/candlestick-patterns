@@ -137,7 +137,7 @@ window.addEventListener("load", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\MyProjects\ml-finance\private_html\_laravel_finance_app\resources\assets\js\app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! D:\MyProjects\candlestick-patterns\laravel-system\private_html\_laravel_finance_app\resources\assets\js\app.js */"./resources/assets/js/app.js");
 
 
 /***/ })
