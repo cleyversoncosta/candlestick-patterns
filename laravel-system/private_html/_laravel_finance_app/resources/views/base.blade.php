@@ -26,6 +26,8 @@
 
 <body>
 
+    @include('navbar')
+
     <main class="my-5">
         <div class="container">
             @yield('content')
