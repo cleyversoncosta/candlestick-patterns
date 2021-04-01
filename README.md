@@ -33,4 +33,4 @@ O resultado final pode ser visto na imagem abaixo
 ---
 --- 
 
-Qualquer dúvida é só fazer contato.
+Qualquer dúvida é só entrar em contato.
