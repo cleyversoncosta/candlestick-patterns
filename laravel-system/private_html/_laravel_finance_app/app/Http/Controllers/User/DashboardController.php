@@ -23,11 +23,6 @@ class DashboardController extends Controller
         $this->graphRepository = $graphRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
 
@@ -50,32 +45,4 @@ class DashboardController extends Controller
         return view('user.dashboard', compact('userChart', 'params', 'symbols', 'timeframes'));
     }
 
-    public function createSMA_EMA($type, $data, $periods)
-    {
-
-        switch ($type) {
-            case 'sma':
-                $ma = Trader::sma(Arr::pluck($data, 'close'), $periods);
-                break;
-            case 'ema':
-                $ma = Trader::ema(Arr::pluck($data, 'close'), $periods);
-                break;
-        }
-
-        $pos = 0;
-        $nData = null;
-
-        for ($x = --$periods; $x < count($data); $x++) {
-            if ($x > $periods) {
-
-                $nData[] = [
-                    'time' => $data[$x]['time'],
-                    'value' => $ma[$pos + $periods]
-                ];
-                $pos++;
-            }
-        }
-
-        return collect($nData);
-    }
 }

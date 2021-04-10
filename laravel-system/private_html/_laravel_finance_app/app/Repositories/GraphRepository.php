@@ -4,8 +4,6 @@ namespace App\Repositories;
 
 use App\Graph;
 use Illuminate\Support\Arr;
-use RecursiveArrayIterator;
-use RecursiveIteratorIterator;
 use Illuminate\Support\Collection;
 use LupeCode\phpTraderNative\Trader;
 use Illuminate\Database\Eloquent\Model;
@@ -15,8 +13,6 @@ class GraphRepository
 
     private $model;
 
-    private $speed = 0;
-
     private $graphOnly = ['minute', 'open', 'high', 'low', 'close', 'trades', 'volume', 'risingFill', 'fallingFill'];
 
     public function __construct(Graph $model)
@@ -24,12 +20,28 @@ class GraphRepository
         $this->model = $model;
     }
 
+    /**
+     * find
+     *
+     * @param  mixed $id
+     * @return Model
+     */
     public function find($id): Model
     {
         return $this->model->find($id);
     }
 
 
+    /**
+     * getOHLCByDateRangeSymbolTimeframe
+     *
+     * @param  mixed $symbol
+     * @param  mixed $periodIni
+     * @param  mixed $periodEnd
+     * @param  mixed $timeframe
+     * @param  mixed $showed
+     * @return Collection
+     */
     public function getOHLCByDateRangeSymbolTimeframe(string $symbol, string $periodIni, string $periodEnd, string $timeframe, int $showed): Collection
     {
 
@@ -49,6 +61,16 @@ class GraphRepository
     }
 
 
+    /**
+     * getEvents
+     *
+     * @param  mixed $symbol
+     * @param  mixed $periodIni
+     * @param  mixed $periodEnd
+     * @param  mixed $timeframe
+     * @param  mixed $showed
+     * @return void
+     */
     public function getEvents(string $symbol, string $periodIni, string $periodEnd, string $timeframe, int $showed)
     {
 
@@ -59,6 +81,17 @@ class GraphRepository
 
 
 
+    /**
+     * getNextNotShowed
+     *
+     * @param  mixed $symbol
+     * @param  mixed $periodIni
+     * @param  mixed $periodEnd
+     * @param  mixed $timeframe
+     * @param  mixed $showed
+     * @param  mixed $speed
+     * @return void
+     */
     public function getNextNotShowed(string $symbol, string $periodIni, string $periodEnd, string $timeframe, int $showed, int $speed)
     {
         $candles = $this->model->getNextNotShowed($symbol, $periodIni, $periodEnd, $timeframe, $showed, $speed);
@@ -70,11 +103,24 @@ class GraphRepository
         return $candles;
     }
 
+    /**
+     * reset
+     *
+     * @param  mixed $symbol
+     * @param  mixed $timeframe
+     * @return void
+     */
     public function reset(string $symbol, string $timeframe): void
     {
         $this->model->reset($symbol, $timeframe);
     }
 
+    /**
+     * prepareParams
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function prepareParams($request)
     {
         $periodIni = strtoupper($request->period_ini);
@@ -112,6 +158,12 @@ class GraphRepository
         ];
     }
 
+    /**
+     * broadcastData
+     *
+     * @param  mixed $data
+     * @return void
+     */
     public function broadcastData($data)
     {
 
@@ -136,17 +188,13 @@ class GraphRepository
         }
     }
 
-    public function updateSpeed($speed)
-    {
-        $this->speed = $speed;
-    }
 
-
-    public function getSpeed()
-    {
-        return $this->speed;
-    }
-
+    /**
+     * colorCandlePattern
+     *
+     * @param  mixed $candles
+     * @return void
+     */
     public function colorCandlePattern($candles)
     {
 
@@ -181,6 +229,13 @@ class GraphRepository
         return $candles;
     }
 
+
+    /**
+     * createEvents
+     *
+     * @param  mixed $candles
+     * @return void
+     */
     public function createEvents($candles)
     {
 
@@ -226,6 +281,14 @@ class GraphRepository
         return $eventsData;
     }
 
+    
+    /**
+     * existFormat
+     *
+     * @param  mixed $eventsLetter
+     * @param  mixed $letter
+     * @return void
+     */
     function existFormat($eventsLetter, $letter)
     {
 
@@ -238,19 +301,16 @@ class GraphRepository
         return false;
     }
 
-    function in_array_recursive($needle, $haystack)
-    {
-        $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($haystack));
-        foreach ($it as $element) {
-            if ($element == $needle) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-
-
+    /**
+     * setCandlePatternColor
+     *
+     * @param  mixed $signal
+     * @param  mixed $pattern
+     * @param  mixed $reliability
+     * @param  mixed $is_up_down
+     * @return void
+     */
     public function setCandlePatternColor($signal, $pattern, $reliability, $is_up_down)
     {
 
@@ -280,6 +340,13 @@ class GraphRepository
     }
 
 
+    /**
+     * setCandlePatternLetter
+     *
+     * @param  mixed $signal
+     * @param  mixed $reliability
+     * @return void
+     */
     public function setCandlePatternLetter($signal, $reliability)
     {
         switch (strtolower($signal)) {
@@ -296,6 +363,12 @@ class GraphRepository
     }
 
 
+    /**
+     * identifyCandlePatternMarkers
+     *
+     * @param  mixed $data
+     * @return void
+     */
     public function identifyCandlePatternMarkers($data)
     {
 
@@ -333,8 +406,44 @@ class GraphRepository
             }
         }
 
-
-
         return collect($markers);
+    }
+
+        
+    /**
+     * createSMA_EMA
+     *
+     * @param  mixed $type
+     * @param  mixed $data
+     * @param  mixed $periods
+     * @return void
+     */
+    public function createSMA_EMA($type, $data, $periods)
+    {
+
+        switch ($type) {
+            case 'sma':
+                $ma = Trader::sma(Arr::pluck($data, 'close'), $periods);
+                break;
+            case 'ema':
+                $ma = Trader::ema(Arr::pluck($data, 'close'), $periods);
+                break;
+        }
+
+        $pos = 0;
+        $nData = null;
+
+        for ($x = --$periods; $x < count($data); $x++) {
+            if ($x > $periods) {
+
+                $nData[] = [
+                    'time' => $data[$x]['time'],
+                    'value' => $ma[$pos + $periods]
+                ];
+                $pos++;
+            }
+        }
+
+        return collect($nData);
     }
 }

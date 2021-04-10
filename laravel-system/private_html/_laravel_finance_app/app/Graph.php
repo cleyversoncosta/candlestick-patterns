@@ -8,7 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Graph extends Model
 {
-
+    
+    /**
+     * getOHLCByDateRangeSymbolTimeframe
+     *
+     * @param  mixed $symbol
+     * @param  mixed $periodIni
+     * @param  mixed $periodEnd
+     * @param  mixed $timeframe
+     * @param  mixed $showed
+     * @return Collection
+     */
     public function getOHLCByDateRangeSymbolTimeframe(string $symbol, string $periodIni, string $periodEnd, string $timeframe, int $showed): Collection
     {
         if ($timeframe == 'M0') {
@@ -75,13 +85,31 @@ class Graph extends Model
         return collect($res);
     }
 
-
+    
+    /**
+     * reset
+     *
+     * @param  mixed $symbol
+     * @param  mixed $timeframe
+     * @return void
+     */
     public function reset(string $symbol, string $timeframe): void
     {
         Graph::where('symbol', $symbol)->where('timeframe', $timeframe)->update(['showed' => 0]);
     }
 
-
+    
+    /**
+     * getNextNotShowed
+     *
+     * @param  mixed $symbol
+     * @param  mixed $periodIni
+     * @param  mixed $periodEnd
+     * @param  mixed $timeframe
+     * @param  mixed $showed
+     * @param  mixed $speed
+     * @return void
+     */
     public function getNextNotShowed(string $symbol, string $periodIni, string $periodEnd, string $timeframe, int $showed, int $speed)
     {
 
